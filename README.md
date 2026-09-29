@@ -3,7 +3,7 @@
 ## Загальна інформація
 
 - **Здобувач освіти:** Зрелко Олександр Вадимович
-- **Група:** [Вкажіть вашу групу]
+- **Група:** ІПЗ-32
 - **Обраний рівень складності:** 2 (Достатній рівень — "добре")
 
 ---
@@ -25,7 +25,7 @@ ORDER BY c.category_name, p.product_name;
 ```
 
 **Результат виконання:**
-![INNER JOIN](screenshots/01_inner_join.png.jpg)
+![INNER JOIN](lab02_screenshots/01_inner_join.png.jpg)
 
 **Пояснення:** Запит поєднує дані з трьох пов'язаних таблиць: каталогу товарів (`products`), категорій (`categories`) та постачальників (`suppliers`). Використано з'єднання `INNER JOIN`, тому до результату потрапляють лише ті записи, для яких знайдено точні збіги за зовнішніми ключами (`category_id` та `supplier_id`). Товари без прив'язаної категорії чи постачальника автоматично виключаються з вибірки.
 
@@ -44,7 +44,7 @@ ORDER BY order_count DESC;
 ```
 
 **Результат виконання:**
-![LEFT JOIN](screenshots/02_left_join.png.jpg)
+![LEFT JOIN](lab02_screenshots/02_left_join.png.jpg)
 
 **Пояснення:** На відміну від `INNER JOIN`, який відсіює записи без пари, `LEFT JOIN` зберігає абсолютно всі записи з лівої таблиці (`customers`), навіть якщо у клієнта немає жодного замовлення в таблиці `orders`. У таких випадках поле `o.order_id` має значення `NULL`, а агрегатна функція `COUNT(o.order_id)` повертає 0. Це дозволяє проаналізувати всю клієнтську базу разом з неактивними покупцями.
 
@@ -71,7 +71,7 @@ ORDER BY o.order_id, p.product_name;
 ```
 
 **Результат виконання:**
-![Множинне з'єднання](screenshots/03_multi_join.png.jpg)
+![Множинне з'єднання](lab02_screenshots/03_multi_join.png.jpg)
 
 **Аналіз складності:** Запит виконує послідовне з'єднання 5 таблиць: відправною точкою є замовлення `orders` ($O$), далі підтягується клієнт `customers` ($C$), позиції чека `order_items` ($I$), найменування товару `products` ($P$) та менеджер `employees` ($E$). Оскільки всі з'єднання виконуються за первинними та зовнішніми B-Tree індексами, PostgreSQL застосовує алгоритм `Hash Join`. Алгоритмічна складність запиту є лінійною від кількості куплених одиниць: $O(I)$, з подальшим сортуванням результату $O(I \log I)$.
 
@@ -94,7 +94,7 @@ ORDER BY product_count DESC;
 ```
 
 **Результат виконання:**
-![Статистика за категоріями](screenshots/04_aggregates_category.png.jpg)
+![Статистика за категоріями](lab02_screenshots/04_aggregates_category.png.jpg)
 
 ---
 
@@ -116,7 +116,7 @@ ORDER BY total_sales DESC;
 ```
 
 **Результат виконання:**
-![Продажі за регіонами](screenshots/05_sales_by_region.png.jpg)
+![Продажі за регіонами](lab02_screenshots/05_sales_by_region.png.jpg)
 
 ---
 
@@ -135,7 +135,7 @@ ORDER BY products_supplied DESC;
 ```
 
 **Результат виконання:**
-![Постачальники HAVING](screenshots/06_suppliers_having.png.jpg)
+![Постачальники HAVING](lab02_screenshots/06_suppliers_having.png.jpg)
 
 ---
 
@@ -156,7 +156,7 @@ ORDER BY c.category_name, p.unit_price DESC;
 ```
 
 **Результат виконання:**
-![Підзапит у WHERE](screenshots/07_subquery_where.png.jpg)
+![Підзапит у WHERE](lab02_screenshots/07_subquery_where.png.jpg)
 
 ---
 
@@ -174,7 +174,7 @@ ORDER BY contact_name;
 ```
 
 **Результат виконання:**
-![Підзапит з IN](screenshots/08_subquery_in.png.jpg)
+![Підзапит з IN](lab02_screenshots/08_subquery_in.png.jpg)
 
 ---
 
@@ -195,7 +195,7 @@ ORDER BY total_units_sold DESC;
 ```
 
 **Результат виконання:**
-![Підзапит у SELECT](screenshots/09_subquery_select.png.jpg)
+![Підзапит у SELECT](lab02_screenshots/09_subquery_select.png.jpg)
 
 ---
 
@@ -216,7 +216,7 @@ ORDER BY products_count DESC;
 ```
 
 **Результат виконання:**
-![RIGHT JOIN](screenshots/10_right_join.png.jpg)
+![RIGHT JOIN](lab02_screenshots/10_right_join.png.jpg)
 
 ---
 
@@ -233,7 +233,7 @@ ORDER BY e2.last_name NULLS FIRST, e1.last_name;
 ```
 
 **Результат виконання:**
-![Self-join](screenshots/11_self_join.png.jpg)
+![Self-join](lab02_screenshots/11_self_join.png.jpg)
 
 ---
 
@@ -254,7 +254,7 @@ ORDER BY c.category_name, p.unit_price DESC;
 ```
 
 **Результат виконання:**
-![Віконне ранжування](screenshots/12_window_ranking.png.jpg)
+![Віконне ранжування](lab02_screenshots/12_window_ranking.png.jpg)
 
 ---
 
@@ -276,7 +276,7 @@ ORDER BY o.customer_id, o.order_date;
 ```
 
 **Результат виконання:**
-![Віконні функції LAG та LEAD](screenshots/13_window_lag_lead.png.jpg)
+![Віконні функції LAG та LEAD](lab02_screenshots/13_window_lag_lead.png.jpg)
 
 ---
 
